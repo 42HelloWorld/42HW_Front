@@ -21,17 +21,17 @@ const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
   const indexRef = useRef<number>(1);
 
   const onSomeoneAccept = () => {
-    const copy = voteStatus.map((v) => v);
-    copy[indexRef.current] = VOTE_SELECT.YES;
-    indexRef.current++;
-    setVoteStatus(copy);
+    setVoteStatus((prev) => {
+      prev[indexRef.current++] = VOTE_SELECT.YES;
+      return prev;
+    });
   };
 
   const onSomeoneReject = () => {
-    const copy = voteStatus.map((v) => v);
-    copy[indexRef.current] = VOTE_SELECT.NO;
-    indexRef.current++;
-    setVoteStatus(copy);
+    setVoteStatus((prev) => {
+      prev[indexRef.current++] = VOTE_SELECT.NO;
+      return prev;
+    });
   };
 
   useEffect(() => {
