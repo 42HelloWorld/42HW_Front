@@ -68,6 +68,11 @@ const Call = () => {
             });
         });
 
+        peer[i].on("connect", () => {
+          if (callInfo.opponent)
+            console.log(callInfo.opponent[i].opponentNickname);
+        });
+
         peer[i].on("stream", (currentStream) => {
           videos[i].current.srcObject = currentStream;
         });
