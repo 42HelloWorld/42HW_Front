@@ -169,6 +169,13 @@ const Call = () => {
     for (let i = 0; i < totalNum; i++) peer[i]?.removeAllListeners();
     socket?.emit("leaveRoom", {});
     console.log("hang up");
+    if (voteId)
+      toast.update(voteId, {
+        type: toast.TYPE.ERROR,
+        render: "통화가 종료되어 투표를 하실 수 없습니다.",
+        autoClose: COUNT.DEFAULT * MILLISECOND,
+        isLoading: false,
+      });
     stopMicrophone();
     setIsMuted(true);
     navigate("/");
@@ -198,9 +205,13 @@ const Call = () => {
           contentsName={data.contentsName}
           requester={data.requester}
           callType={callType}
-          isEnd={!opponentStatus}
         />,
-        { autoClose: (COUNT.VOTE - COUNT.DIFF) * MILLISECOND }
+        {
+          autoClose: (COUNT.VOTE - COUNT.DIFF) * MILLISECOND,
+          onClose: () => {
+            setVoteId(0);
+          },
+        }
       );
       setVoteId(id);
     },

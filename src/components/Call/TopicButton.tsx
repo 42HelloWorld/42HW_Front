@@ -33,6 +33,9 @@ const TopicButton: FC<Props> = ({ text, img, setVoteId }) => {
         if (result) {
           const id = toast.info(<WaitToast callType={callType} />, {
             autoClose: (COUNT.VOTE - COUNT.DIFF) * MILLISECOND,
+            onClose: () => {
+              setVoteId(0);
+            },
           });
           setVoteId(id);
         } else toast.warning("이미 투표가 진행중입니다!");
