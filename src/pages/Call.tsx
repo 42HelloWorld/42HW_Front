@@ -41,7 +41,7 @@ const Call = () => {
   const totalNum =
     callInfo.roomType === SINGLE_CALL.TYPE
       ? SINGLE_CALL.TOTAL_NUM - 1
-      : GROUP_CALL.TOTAL_NUM - 2;
+      : GROUP_CALL.TOTAL_NUM - 1;
 
   // /call로 접근하였을 때 잘 login 화면으로 가는지?
   useEffect(() => {
@@ -229,6 +229,7 @@ const Call = () => {
       <div className="h-[15%] flex flex-col justify-evenly">
         {callInfo.opponent?.map((v, i) => (
           <video
+            key={`opponentVideo-${v}-${i}`}
             width={1}
             height={1}
             playsInline
