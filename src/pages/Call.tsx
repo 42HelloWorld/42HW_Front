@@ -30,9 +30,11 @@ const Call = () => {
   const [contents, setContents] = useState<any>([]);
   const { callInfo, dispatch } = useContext(CallContext);
   const { socket } = useContext(SocketContext);
-  const videos = new Array(callInfo.opponent?.length).fill(
-    useRef<HTMLVideoElement>(null)
-  );
+  const videos = [
+    useRef<HTMLVideoElement>(null),
+    useRef<HTMLVideoElement>(null),
+    useRef<HTMLVideoElement>(null),
+  ];
   const timeoutId = useRef<any>(0);
   const peerRef = useRef<Peer.Instance[]>([]);
   const peer = peerRef.current;
@@ -74,6 +76,8 @@ const Call = () => {
         });
 
         peer[i].on("stream", (currentStream) => {
+          console.log(i);
+          console.log(currentStream);
           videos[i].current.srcObject = currentStream;
         });
 
