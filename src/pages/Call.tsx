@@ -42,6 +42,8 @@ const Call = () => {
     callInfo.roomType === SINGLE_CALL.TYPE
       ? SINGLE_CALL.TOTAL_NUM - 1
       : GROUP_CALL.TOTAL_NUM - 1;
+  const callType =
+    callInfo.roomType === SINGLE_CALL.TYPE ? SINGLE_CALL : GROUP_CALL;
 
   // /call로 접근하였을 때 잘 login 화면으로 가는지?
   useEffect(() => {
@@ -195,7 +197,7 @@ const Call = () => {
         <VoteToast
           contentsName={data.contentsName}
           requester={data.requester}
-          callType={SINGLE_CALL}
+          callType={callType}
         />,
         { autoClose: (COUNT.VOTE - COUNT.DIFF) * MILLISECOND }
       );
