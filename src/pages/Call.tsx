@@ -78,7 +78,7 @@ const Call = () => {
         peer[i].on("stream", (currentStream) => {
           console.log(i);
           console.log(currentStream);
-          videos[i].current.srcObject = currentStream;
+          videos[i].current!.srcObject = currentStream;
         });
 
         peer[i].on("error", (err) => {
