@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Loading from "@utils/Loading";
 import BasicButton from "@utils/BasicButton";
@@ -12,6 +12,7 @@ import { OpponentInfo } from "@typings/front";
 
 const Waiting = () => {
   const navigate = useNavigate();
+  const [matched, setMatched] = useState(false);
   const { myInfo } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
   const { callInfo, dispatch } = useContext(CallContext);
@@ -30,6 +31,7 @@ const Waiting = () => {
         "matching",
         (data: { opponent: OpponentInfo[]; roomName: string }) => {
           console.log("matching");
+          setMatched(true);
           dispatch({
             type: CallActionType.SET_MATCHING,
             payload: {
@@ -68,6 +70,9 @@ const Waiting = () => {
 
   const cancelWaiting = useCallback(() => {
     dispatch({ type: CallActionType.DEL_ALL });
+    socket?.emit("unregister", {
+      nickname: myInfo?.nickname,
+    });
     stopMicrophone();
     navigate("/main");
   }, [callInfo]);
@@ -85,7 +90,11 @@ const Waiting = () => {
   return (
     <Loading text={"상대방을 찾는 중입니다."}>
       <div className="my-auto">
-        <BasicButton onClick={cancelWaiting} text="매칭 취소하기" />
+        <BasicButton
+          onClick={cancelWaiting}
+          text="매칭 취소하기"
+          disabled={matched}
+        />
       </div>
     </Loading>
   );

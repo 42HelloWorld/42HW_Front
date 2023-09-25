@@ -8,9 +8,10 @@ interface Props {
   contentsName: string;
   requester: string;
   callType: CallType;
+  isEnd: boolean;
 }
 
-const VoteToast: FC<Props> = ({ contentsName, requester, callType }) => {
+const VoteToast: FC<Props> = ({ contentsName, requester, callType, isEnd }) => {
   const { socket } = useContext(SocketContext);
   const { callInfo } = useContext(CallContext);
   const [isVoted, setIsVoted] = useState<boolean | null>(null);
@@ -41,12 +42,14 @@ const VoteToast: FC<Props> = ({ contentsName, requester, callType }) => {
             <button
               className="w-[40%] h-[30px] rounded-md bg-blue-600"
               onClick={voteAccept}
+              disabled={isEnd}
             >
               찬성
             </button>
             <button
               className="w-[40%] h-[30px] rounded-md bg-gray-400"
               onClick={voteReject}
+              disabled={isEnd}
             >
               반대
             </button>

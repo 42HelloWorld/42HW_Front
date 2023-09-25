@@ -19,7 +19,6 @@ import {
 import { toast, Id } from "react-toastify";
 import VoteToast from "@components/Call/VoteToast";
 import TopicModal from "@components/Call/TopicModal";
-import { ToastContainer } from "react-toastify";
 
 const Call = () => {
   const navigate = useNavigate();
@@ -199,6 +198,7 @@ const Call = () => {
           contentsName={data.contentsName}
           requester={data.requester}
           callType={callType}
+          isEnd={!opponentStatus}
         />,
         { autoClose: (COUNT.VOTE - COUNT.DIFF) * MILLISECOND }
       );
@@ -291,15 +291,6 @@ const Call = () => {
       <div className="flex justify-center h-[10%]">
         <CallButton onClick={hangUp} type="hang-up" img="hang-up.svg" />
       </div>
-      <ToastContainer
-        position="top-center"
-        theme="colored"
-        closeOnClick={false}
-        pauseOnHover={false}
-        pauseOnFocusLoss={false}
-        autoClose={COUNT.DEFAULT * MILLISECOND}
-        style={{ maxWidth: "500px", width: "100vw" }}
-      />
     </div>
   );
 };
