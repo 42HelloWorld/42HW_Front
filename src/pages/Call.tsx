@@ -216,8 +216,10 @@ const Call = () => {
         isLoading: false,
       });
       // 컨텐츠 업데이트
-      setContents(data.contents);
-      setScreen(SCREEN.TOPIC_MODAL);
+      if (data.result) {
+        setContents(data.contents);
+        setScreen(SCREEN.TOPIC_MODAL);
+      }
     },
     [voteId]
   );
