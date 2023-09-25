@@ -22,15 +22,17 @@ const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
 
   const onSomeoneAccept = () => {
     setVoteStatus((prev) => {
-      prev[indexRef.current++] = VOTE_SELECT.YES;
-      return prev;
+      const copy = prev.map((v) => v);
+      copy[indexRef.current++] = VOTE_SELECT.YES;
+      return copy;
     });
   };
 
   const onSomeoneReject = () => {
     setVoteStatus((prev) => {
-      prev[indexRef.current++] = VOTE_SELECT.NO;
-      return prev;
+      const copy = prev.map((v) => v);
+      copy[indexRef.current++] = VOTE_SELECT.NO;
+      return copy;
     });
   };
 
