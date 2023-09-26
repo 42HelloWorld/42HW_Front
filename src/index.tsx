@@ -27,7 +27,7 @@ axios.interceptors.response.use(
     alert("로그인 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
     localStorage.removeItem("isLogin");
     window.location.href = "/";
-    return Promise.reject(error);
+    // return Promise.reject(error);
   }
 );
 
