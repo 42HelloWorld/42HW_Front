@@ -19,20 +19,17 @@ axios.defaults.baseURL =
   // :
   API_URL;
 
-// // 토큰이 있으면 꺼내서 axios에 저장
-// function loadUserData() {
-//   try {
-//     const token = localStorage.getItem("at");
-//     // 없으면 일단 저장하지 않음
-//     if (!token) return;
-
-//     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-//   } catch (e) {
-//     console.log("localStorage is not working");
-//   }
-// }
-
-// loadUserData();
+axios.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    alert("로그인 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
+    localStorage.removeItem("isLogin");
+    window.location.href = "/";
+    return Promise.reject(error);
+  }
+);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

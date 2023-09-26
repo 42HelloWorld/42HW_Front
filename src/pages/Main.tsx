@@ -32,15 +32,10 @@ const Main = () => {
   );
 
   const getMyInfo = useCallback(async () => {
-    try {
-      const response = await axios.get(`${API_URL}/users`);
-      setMyInfo(response.data);
-      setIsLoading(false);
-      connectSocket(response.data.nickname);
-    } catch (e) {
-      alert("로그인 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
-      navigate("/");
-    }
+    const response = await axios.get(`${API_URL}/users`);
+    setMyInfo(response.data);
+    setIsLoading(false);
+    connectSocket(response.data.nickname);
   }, []);
 
   const joinSingleChat = useCallback(() => {
