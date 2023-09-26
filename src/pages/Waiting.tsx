@@ -18,12 +18,12 @@ const Waiting = () => {
   const { callInfo, dispatch } = useContext(CallContext);
 
   useEffect(() => {
+    // 잘못된 접근했을 때
     if (myInfo === null) {
       stopMicrophone();
       navigate("/main");
     }
   }, []);
-  console.log(callInfo.stream);
 
   useEffect(() => {
     if (socket) {
@@ -87,7 +87,9 @@ const Waiting = () => {
     e.returnValue = true;
   }, []);
 
-  return (
+  return myInfo === null ? (
+    <Loading />
+  ) : (
     <Loading text={"상대방을 찾는 중입니다."}>
       <div className="my-auto">
         <BasicButton

@@ -19,6 +19,7 @@ import {
 import { toast, Id } from "react-toastify";
 import VoteToast from "@components/Call/VoteToast";
 import TopicModal from "@components/Call/TopicModal";
+import Loading from "@utils/Loading";
 
 const Call = () => {
   const navigate = useNavigate();
@@ -132,7 +133,8 @@ const Call = () => {
   }, []);
 
   useEffect(() => {
-    if (peer === null) {
+    // 잘못된 접근했을 때
+    if (callInfo.roomName === null) {
       navigate("/main");
     }
   }, []);
@@ -220,7 +222,9 @@ const Call = () => {
     toast.error("실패");
   }, []);
 
-  return (
+  return callInfo.roomName === null ? (
+    <Loading />
+  ) : (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <div className="h-[15%] flex flex-col justify-evenly">
         {callInfo.opponent?.map((v, i) => (

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import BasicButton from "@utils/BasicButton";
 import MicrophoneSoundChecker from "@utils/MicrophoneSoundChecker";
 import { MIC_STATUS } from "@utils/constant";
+import Loading from "@utils/Loading";
 
 const Setting = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Setting = () => {
   const streamArray = useRef<MediaStream[]>([]);
 
   useEffect(() => {
+    // 잘못된 접근했을 때
     if (myInfo === null) {
       stopAllStreams();
       navigate("/main");
@@ -91,7 +93,9 @@ const Setting = () => {
     navigate("/waiting");
   }, []);
 
-  return (
+  return myInfo === null ? (
+    <Loading />
+  ) : (
     <div className="flex flex-col w-full h-full justify-center items-center">
       <div className="h-[50%]">
         <MicrophoneSoundChecker isDone={isDone} />
