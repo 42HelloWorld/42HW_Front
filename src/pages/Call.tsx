@@ -166,13 +166,13 @@ const Call = () => {
     return () => {
       window.removeEventListener("beforeunload", preventClose);
       stopMicrophone();
-      axios.get(`${API_URL}/auth/test`);
     };
   }, []);
 
   const preventClose = useCallback((e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = true;
+    axios.get(`${API_URL}/auth/test`);
   }, []);
 
   const muteToggle = useCallback(() => {
