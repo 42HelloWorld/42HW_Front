@@ -166,6 +166,7 @@ const Call = () => {
     return () => {
       window.removeEventListener("beforeunload", preventClose);
       stopMicrophone();
+      socket?.disconnect();
     };
   }, []);
 
