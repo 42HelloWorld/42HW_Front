@@ -32,7 +32,7 @@ const Call = () => {
   const [voteId, setVoteId] = useState<Id>(0);
   const [contents, setContents] = useState<any>([]);
   const { callInfo, dispatch } = useContext(CallContext);
-  const { socket } = useContext(SocketContext);
+  const { socket, setSocket } = useContext(SocketContext);
   const videos = [
     useRef<HTMLVideoElement>(null),
     useRef<HTMLVideoElement>(null),
@@ -166,7 +166,9 @@ const Call = () => {
     return () => {
       window.removeEventListener("beforeunload", preventClose);
       stopMicrophone();
+      // 뒤로가기나,
       socket?.disconnect();
+      setSocket(null);
     };
   }, []);
 

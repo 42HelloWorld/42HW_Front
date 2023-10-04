@@ -4,7 +4,6 @@ import ProfileCard from "@components/Profile/ProfileCard";
 import LangSelect from "@components/Profile/LangSelect";
 import CallHistoryList from "@components/Profile/CallHistoryList";
 import BasicButton from "@utils/BasicButton";
-import { deleteCookie } from "@utils/manageCookie";
 import Header from "@utils/Header";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
@@ -16,8 +15,8 @@ const Profile = () => {
 
   const logout = useCallback(async () => {
     await axios.get(`${API_URL}/auth/logout`);
-    // deleteCookie("login");
-    // window.location.href = "/";
+    alert("로그아웃 되었습니다.");
+    window.location.href = "/";
   }, []);
 
   const closeModal = useCallback(() => {

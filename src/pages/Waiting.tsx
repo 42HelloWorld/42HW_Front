@@ -22,7 +22,7 @@ const Waiting = () => {
 
   useEffect(() => {
     // 잘못된 접근했을 때
-    if (myInfo === null) {
+    if (myInfo === null || socket === null) {
       stopMicrophone();
       navigate("/main");
     }
@@ -90,7 +90,7 @@ const Waiting = () => {
     e.returnValue = true;
   }, []);
 
-  return myInfo === null ? (
+  return socket === null ? (
     <Loading />
   ) : (
     <>
