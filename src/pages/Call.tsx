@@ -15,11 +15,13 @@ import {
   MILLISECOND,
   SINGLE_CALL,
   GROUP_CALL,
+  API_URL,
 } from "@utils/constant";
 import { toast, Id } from "react-toastify";
 import VoteToast from "@components/Call/VoteToast";
 import TopicModal from "@components/Call/TopicModal";
 import Loading from "@utils/Loading";
+import axios from "axios";
 
 const Call = () => {
   const navigate = useNavigate();
@@ -164,6 +166,7 @@ const Call = () => {
     return () => {
       window.removeEventListener("beforeunload", preventClose);
       stopMicrophone();
+      axios.get(`${API_URL}/auth/test`);
     };
   }, []);
 
