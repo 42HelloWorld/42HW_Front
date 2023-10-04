@@ -108,6 +108,8 @@ const Call = () => {
               toast.error("통화가 종료되었습니다. 메인 화면으로 돌아갑니다.");
               dispatch({ type: CallActionType.DEL_ALL });
               timeoutId.current = setTimeout(() => {
+                socket?.disconnect();
+                setSocket(null);
                 hangUp();
               }, COUNT.HANG_UP * MILLISECOND);
             }
