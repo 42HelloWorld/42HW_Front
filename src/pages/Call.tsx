@@ -141,11 +141,13 @@ const Call = () => {
     socket?.on("vote", onVote);
     socket?.on("voteResult", onVoteResult);
     socket?.on("voteFail", onVoteFail);
+    socket?.on("socketDisconnect", onSocketDisconnect);
 
     return () => {
       socket?.off("vote", onVote);
       socket?.off("voteResult", onVoteResult);
       socket?.off("voteFail", onVoteFail);
+      socket?.off("socketDisconnect", onSocketDisconnect);
     };
   }, [voteId]);
 
@@ -186,10 +188,11 @@ const Call = () => {
     setIsMuted((prev) => !prev);
   }, [callInfo]);
 
+  // 뒤로가기 및 통화 종료 버튼 클릭의 경우
   const hangUp = useCallback(() => {
     for (let i = 0; i < totalNum; i++) peer[i]?.destroy();
     for (let i = 0; i < totalNum; i++) peer[i]?.removeAllListeners();
-    socket?.emit("leaveRoom", {});
+    // socket?.emit("leaveRoom", {});
     console.log("hang up");
     stopMicrophone();
     setIsMuted(true);
@@ -252,6 +255,10 @@ const Call = () => {
 
   const onVoteFail = useCallback(() => {
     toast.error("시간 초과로 투표가 부결되었습니다.");
+  }, []);
+
+  const onSocketDisconnect = useCallback((data: { nickname: string }) => {
+    console.log(data.nickname);
   }, []);
 
   return socket === null ? (
