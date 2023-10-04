@@ -27,7 +27,7 @@ const Setting = () => {
       navigate("/main");
     }
     getUserMedia();
-  }, [micStatus]);
+  }, [micStatus, socket]);
 
   useEffect(() => {
     const id = setInterval(() => {

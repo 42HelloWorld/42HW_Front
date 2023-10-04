@@ -26,7 +26,7 @@ const Waiting = () => {
       stopMicrophone();
       navigate("/main");
     }
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     if (socket) {
