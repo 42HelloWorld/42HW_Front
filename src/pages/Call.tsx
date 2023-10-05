@@ -275,7 +275,7 @@ const Call = () => {
         copy[target] = false;
         let closed = true;
         for (let i = 0; i < copy.length; i++) {
-          if (copy[target]) {
+          if (copy[i]) {
             closed = false;
             break;
           }
