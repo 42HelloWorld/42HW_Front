@@ -93,30 +93,30 @@ const Call = () => {
           console.log("opponent left");
         });
 
-        // peer[i].on("close", () => {
-        //   console.log("Peer 연결이 종료되었습니다.");
-        //   setOpponentStatus((prev) => {
-        //     const copy = prev.map((v) => v);
-        //     copy[i] = false;
-        //     let closed = true;
-        //     for (let i = 0; i < copy.length; i++) {
-        //       if (copy[i]) {
-        //         closed = false;
-        //         break;
-        //       }
-        //     }
-        //     if (closed) {
-        //       toast.error("통화가 종료되었습니다. 메인 화면으로 돌아갑니다.");
-        //       dispatch({ type: CallActionType.DEL_ALL });
-        //       timeoutId.current = setTimeout(() => {
-        //         socket?.disconnect();
-        //         setSocket(null);
-        //         hangUp();
-        //       }, COUNT.HANG_UP * MILLISECOND);
-        //     }
-        //     return copy;
-        //   });
-        // });
+        peer[i].on("close", () => {
+          console.log("Peer 연결이 종료되었습니다.");
+          //   setOpponentStatus((prev) => {
+          //     const copy = prev.map((v) => v);
+          //     copy[i] = false;
+          //     let closed = true;
+          //     for (let i = 0; i < copy.length; i++) {
+          //       if (copy[i]) {
+          //         closed = false;
+          //         break;
+          //       }
+          //     }
+          //     if (closed) {
+          //       toast.error("통화가 종료되었습니다. 메인 화면으로 돌아갑니다.");
+          //       dispatch({ type: CallActionType.DEL_ALL });
+          //       timeoutId.current = setTimeout(() => {
+          //         socket?.disconnect();
+          //         setSocket(null);
+          //         hangUp();
+          //       }, COUNT.HANG_UP * MILLISECOND);
+          //     }
+          //     return copy;
+          //   });
+        });
 
         peer[i].on("data", (data) => console.log(data));
       }
@@ -261,15 +261,19 @@ const Call = () => {
     (data: { nickname: string }) => {
       let target = 0;
 
+      console.log("socketDisconnect", callInfo.currNum);
+
       if (callInfo.opponent)
         callInfo.opponent.forEach((v, i) => {
-          if (v.opponentNickname === data.nickname) target = i;
+          if (v.opponentNickname === data.nickname) {
+            target = i;
+            dispatch({
+              type: CallActionType.SET_CURRNUM,
+              payload: callInfo.currNum! - 1,
+            });
+          }
         });
 
-      dispatch({
-        type: CallActionType.SET_CURRNUM,
-        payload: callInfo.currNum! - 1,
-      });
       setOpponentStatus((prev) => {
         const copy = prev.map((v) => v);
         copy[target] = false;
