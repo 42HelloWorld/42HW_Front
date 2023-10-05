@@ -16,7 +16,11 @@ interface Props {
 const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
   const { socket } = useContext(SocketContext);
   const [voteStatus, setVoteStatus] = useState<string[]>(
-    [VOTE_SELECT.YES].concat(new Array(totalNum! - 1).fill(VOTE_SELECT.ONGOING))
+    totalNum === null
+      ? []
+      : [VOTE_SELECT.YES].concat(
+          new Array(totalNum! - 1).fill(VOTE_SELECT.ONGOING)
+        )
   );
   const indexRef = useRef<number>(1);
 
@@ -47,20 +51,24 @@ const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
 
   return (
     <div className={`grid grid-cols-${totalNum} w-full my-1 mx-auto`}>
-      {voteStatus.map((v, i) => (
-        <div key={`voteBlock-${v}-${i}`} className="p-[2px]">
-          <div
-            className={`h-[20px] bg-${
-              v === VOTE_SELECT.ONGOING
-                ? "gray"
-                : v === VOTE_SELECT.YES
-                ? "green"
-                : "red"
-            }-500`}
-            key={`voteToast + ${v} + ${i}`}
-          />
-        </div>
-      ))}
+      {totalNum === null ? (
+        <div>통화가 종료되었습니다.</div>
+      ) : (
+        voteStatus.map((v, i) => (
+          <div key={`voteBlock-${v}-${i}`} className="p-[2px]">
+            <div
+              className={`h-[20px] bg-${
+                v === VOTE_SELECT.ONGOING
+                  ? "gray"
+                  : v === VOTE_SELECT.YES
+                  ? "green"
+                  : "red"
+              }-500`}
+              key={`voteToast + ${v} + ${i}`}
+            />
+          </div>
+        ))
+      )}
     </div>
   );
 };
