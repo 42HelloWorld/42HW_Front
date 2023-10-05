@@ -171,9 +171,10 @@ const Call = () => {
     return () => {
       window.removeEventListener("beforeunload", preventClose);
       stopMicrophone();
-      // 뒤로가기나 새로고침하는 경우
+      // 뒤로가기나 새로고침이나 종료 버튼을 누르는 경우
       socket?.disconnect();
       setSocket(null);
+      dispatch({ type: CallActionType.DEL_ALL });
     };
   }, []);
 
@@ -275,8 +276,6 @@ const Call = () => {
         type: CallActionType.SET_CURRNUM,
         payload: callInfo.currNum! - 1,
       });
-
-      console.log("call", callInfo.currNum);
 
       setOpponentStatus((prev) => {
         const copy = prev.map((v) => v);

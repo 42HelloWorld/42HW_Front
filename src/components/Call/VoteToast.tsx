@@ -13,8 +13,6 @@ const VoteToast: FC<Props> = ({ contentsName, requester }) => {
   const { callInfo } = useContext(CallContext);
   const [isVoted, setIsVoted] = useState<boolean | null>(null);
 
-  console.log("toast", callInfo.currNum);
-
   const voteAccept = useCallback(() => {
     socket?.emit("voteAccept", {
       roomName: callInfo.roomName,
