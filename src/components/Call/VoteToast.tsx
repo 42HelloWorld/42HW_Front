@@ -6,10 +6,9 @@ import VoteStatusBoard from "@components/Call/VoteStatusBoard";
 interface Props {
   contentsName: string;
   requester: string;
-  totalNum: number;
 }
 
-const VoteToast: FC<Props> = ({ contentsName, requester, totalNum }) => {
+const VoteToast: FC<Props> = ({ contentsName, requester }) => {
   const { socket } = useContext(SocketContext);
   const { callInfo } = useContext(CallContext);
   const [isVoted, setIsVoted] = useState<boolean | null>(null);
@@ -33,7 +32,7 @@ const VoteToast: FC<Props> = ({ contentsName, requester, totalNum }) => {
   return (
     <div className="flex flex-col justify-evenly">
       <div className="my-1">{`[${requester}] TOPIC-${contentsName} 요청`}</div>
-      <VoteStatusBoard totalNum={totalNum} />
+      <VoteStatusBoard totalNum={callInfo.currNum} />
       <div className="flex justify-evenly my-1">
         {callInfo.roomName ? (
           isVoted === null ? (

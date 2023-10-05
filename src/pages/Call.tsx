@@ -62,6 +62,7 @@ const Call = () => {
         status.push(true);
       }
     setOpponentStatus(status);
+    dispatch({ type: CallActionType.SET_CURRNUM, payload: totalNum });
   }, []);
 
   // TODO : 좌우 반전, 마이크 mute
@@ -223,7 +224,6 @@ const Call = () => {
         <VoteToast
           contentsName={data.contentsName}
           requester={data.requester}
-          totalNum={opponentStatus.filter((v) => v === true).length}
         />,
         { autoClose: (COUNT.VOTE - COUNT.DIFF) * MILLISECOND }
       );
@@ -266,6 +266,10 @@ const Call = () => {
           if (v.opponentNickname === data.nickname) target = i;
         });
 
+      dispatch({
+        type: CallActionType.SET_CURRNUM,
+        payload: callInfo.currNum! - 1,
+      });
       setOpponentStatus((prev) => {
         const copy = prev.map((v) => v);
         copy[target] = false;

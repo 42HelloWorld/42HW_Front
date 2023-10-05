@@ -9,6 +9,7 @@ export const CallActionType = {
   SET_STREAM: "SET_STREAM",
   SET_MATCHING: "SET_MATCHING",
   SET_ROOMTYPE: "SET_ROOMTYPE",
+  SET_CURRNUM: "SET_CURRNUM",
   DEL_ALL: "DEL_ALL",
 };
 
@@ -17,6 +18,7 @@ const initialCallState: CallInfo = {
   roomName: null,
   roomType: null,
   opponent: null,
+  currNum: null,
 };
 
 export const CallContext = createContext<{
@@ -49,11 +51,17 @@ const callReducer = (
         roomName: null,
         roomType: null,
         opponent: null,
+        currNum: null,
       };
     case CallActionType.SET_ROOMTYPE:
       return {
         ...state,
         roomType: action.payload,
+      };
+    case CallActionType.SET_CURRNUM:
+      return {
+        ...state,
+        currNum: action.payload,
       };
     default:
       return state;

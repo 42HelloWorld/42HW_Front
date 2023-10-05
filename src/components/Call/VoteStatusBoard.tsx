@@ -10,13 +10,13 @@ import { VOTE_SELECT } from "@utils/constant";
 import { SocketContext } from "@contexts/SocketProvider";
 
 interface Props {
-  totalNum: number;
+  totalNum: number | null;
 }
 
 const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
   const { socket } = useContext(SocketContext);
   const [voteStatus, setVoteStatus] = useState<string[]>(
-    [VOTE_SELECT.YES].concat(new Array(totalNum - 1).fill(VOTE_SELECT.ONGOING))
+    [VOTE_SELECT.YES].concat(new Array(totalNum! - 1).fill(VOTE_SELECT.ONGOING))
   );
   const indexRef = useRef<number>(1);
 

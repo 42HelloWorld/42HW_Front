@@ -14,4 +14,5 @@ export interface CallInfo {
   roomName: string | null;
   roomType: string | null;
   opponent: OpponentInfo[] | null;
+  currNum: number | null;
 }
