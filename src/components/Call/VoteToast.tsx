@@ -29,6 +29,8 @@ const VoteToast: FC<Props> = ({ contentsName, requester }) => {
     setIsVoted(false);
   }, [isVoted]);
 
+  console.log(callInfo.currNum);
+
   return (
     <div className="flex flex-col justify-evenly">
       <div className="my-1">{`[${requester}] TOPIC-${contentsName} 요청`}</div>
