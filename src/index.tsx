@@ -12,7 +12,6 @@ import CallProvider from "@contexts/CallProvider";
 import axios from "axios";
 import { deleteCookie } from "@utils/manageCookie";
 
-// TODO : axios interceptor 사용하기
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL =
   //   process.env.NODE_ENV === "production"
