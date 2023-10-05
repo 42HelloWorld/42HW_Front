@@ -25,7 +25,7 @@ const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
   const indexRef = useRef<number>(1);
   const totalNumRef = useRef<number>(totalNum);
 
-  console.log(totalNum);
+  console.log("board", totalNum);
 
   const onSomeoneAccept = useCallback(() => {
     setVoteStatus((prev) => {

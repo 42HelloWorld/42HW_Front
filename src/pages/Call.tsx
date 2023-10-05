@@ -269,10 +269,13 @@ const Call = () => {
           target = i;
         }
       });
+
     dispatch({
       type: CallActionType.SET_CURRNUM,
-      payload: callInfo.currNum!--,
+      payload: callInfo.currNum! - 1,
     });
+
+    console.log("call", callInfo.currNum);
 
     setOpponentStatus((prev) => {
       const copy = prev.map((v) => v);
