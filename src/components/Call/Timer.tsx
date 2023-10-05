@@ -24,6 +24,7 @@ const Timer = () => {
   }, []);
 
   useEffect(() => {
+    console.log(callInfo.currNum);
     if (callInfo.currNum === 1) clearInterval(intervalId.current);
   }, [callInfo]);
 
