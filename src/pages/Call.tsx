@@ -194,7 +194,6 @@ const Call = () => {
   const hangUp = useCallback(() => {
     for (let i = 0; i < totalNum; i++) peer[i]?.destroy();
     for (let i = 0; i < totalNum; i++) peer[i]?.removeAllListeners();
-    // socket?.emit("leaveRoom", {});
     console.log("hang up");
     stopMicrophone();
     setIsMuted(true);
@@ -262,14 +261,9 @@ const Call = () => {
     (data: { nickname: string }) => {
       let target = 0;
 
-      // console.log(data.nickname);
       if (callInfo.opponent)
         callInfo.opponent.forEach((v, i) => {
-          // console.log(v, i);
-          if (v.opponentNickname === data.nickname) {
-            // console.log("checked", i);
-            target = i;
-          }
+          if (v.opponentNickname === data.nickname) target = i;
         });
 
       dispatch({
@@ -289,8 +283,9 @@ const Call = () => {
         }
         if (closed) {
           toast.error("통화가 종료되었습니다. 메인 화면으로 돌아갑니다.");
-          dispatch({ type: CallActionType.DEL_ALL });
+          dispatch({ type: CallActionType.SET_CURRNUM, payload: null });
           timeoutId.current = setTimeout(() => {
+            dispatch({ type: CallActionType.DEL_ALL });
             socket?.disconnect();
             setSocket(null);
             hangUp();
