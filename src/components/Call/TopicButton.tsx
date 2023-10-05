@@ -31,7 +31,7 @@ const TopicButton: FC<Props> = ({ text, img, setVoteId }) => {
       },
       (result: boolean) => {
         if (result) {
-          const id = toast.info(<WaitToast callType={callType} />, {
+          const id = toast.info(<WaitToast />, {
             autoClose: (COUNT.VOTE - COUNT.DIFF) * MILLISECOND,
           });
           setVoteId(id);

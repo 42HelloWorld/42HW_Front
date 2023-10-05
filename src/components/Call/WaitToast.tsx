@@ -1,16 +1,18 @@
-import { FC } from "react";
-import { CallType } from "@typings/front";
+import { useContext } from "react";
 import VoteStatusBoard from "./VoteStatusBoard";
+import { CallContext } from "@contexts/CallProvider";
 
-interface Props {
-  callType: CallType;
-}
+const WaitToast = () => {
+  const { callInfo } = useContext(CallContext);
 
-const WaitToast: FC<Props> = ({ callType }) => {
   return (
     <div>
       <div className="my-1">투표 중입니다.</div>
-      <VoteStatusBoard totalNum={callType.TOTAL_NUM} />
+      {callInfo.currNum ? (
+        <VoteStatusBoard totalNum={callInfo.currNum} />
+      ) : (
+        <div>통화가 종료되었습니다.</div>
+      )}
     </div>
   );
 };
