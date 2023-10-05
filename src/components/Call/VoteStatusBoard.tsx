@@ -23,7 +23,7 @@ const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
         )
   );
   const indexRef = useRef<number>(1);
-  const fixedTotalNum = totalNum;
+  const totalNumRef = useRef<number>(totalNum);
 
   const onSomeoneAccept = useCallback(() => {
     setVoteStatus((prev) => {
@@ -51,7 +51,7 @@ const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
   }, []);
 
   return (
-    <div className={`grid grid-cols-${fixedTotalNum} w-full my-1 mx-auto`}>
+    <div className={`grid grid-cols-${totalNumRef} w-full my-1 mx-auto`}>
       {totalNum === null ? (
         <div>통화가 종료되었습니다.</div>
       ) : (
