@@ -261,12 +261,16 @@ const Call = () => {
     (data: { nickname: string }) => {
       let target = 0;
 
+      console.log(data.nickname);
       if (callInfo.opponent)
         callInfo.opponent.forEach((v, i) => {
+          console.log(v, i);
           if (v.opponentNickname === data.nickname) {
+            console.log("checked", i);
             target = i;
           }
         });
+      console.log("disconnect", callInfo.currNum);
       dispatch({
         type: CallActionType.SET_CURRNUM,
         payload: callInfo.currNum! - 1,
