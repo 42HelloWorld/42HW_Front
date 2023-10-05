@@ -1,16 +1,15 @@
 import { FC, useState, useCallback, useContext } from "react";
 import { SocketContext } from "@contexts/SocketProvider";
 import { CallContext } from "@contexts/CallProvider";
-import { CallType } from "@typings/front";
-import VoteStatus from "@components/Call/VoteStatusBoard";
+import VoteStatusBoard from "@components/Call/VoteStatusBoard";
 
 interface Props {
   contentsName: string;
   requester: string;
-  callType: CallType;
+  totalNum: number;
 }
 
-const VoteToast: FC<Props> = ({ contentsName, requester, callType }) => {
+const VoteToast: FC<Props> = ({ contentsName, requester, totalNum }) => {
   const { socket } = useContext(SocketContext);
   const { callInfo } = useContext(CallContext);
   const [isVoted, setIsVoted] = useState<boolean | null>(null);
@@ -34,7 +33,7 @@ const VoteToast: FC<Props> = ({ contentsName, requester, callType }) => {
   return (
     <div className="flex flex-col justify-evenly">
       <div className="my-1">{`[${requester}] TOPIC-${contentsName} 요청`}</div>
-      <VoteStatus totalNum={callType.TOTAL_NUM} />
+      <VoteStatusBoard totalNum={totalNum} />
       <div className="flex justify-evenly my-1">
         {callInfo.roomName ? (
           isVoted === null ? (

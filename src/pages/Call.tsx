@@ -92,30 +92,30 @@ const Call = () => {
           console.log("opponent left");
         });
 
-        peer[i].on("close", () => {
-          console.log("Peer 연결이 종료되었습니다.");
-          setOpponentStatus((prev) => {
-            const copy = prev.map((v) => v);
-            copy[i] = false;
-            let closed = true;
-            for (let i = 0; i < copy.length; i++) {
-              if (copy[i]) {
-                closed = false;
-                break;
-              }
-            }
-            if (closed) {
-              toast.error("통화가 종료되었습니다. 메인 화면으로 돌아갑니다.");
-              dispatch({ type: CallActionType.DEL_ALL });
-              timeoutId.current = setTimeout(() => {
-                socket?.disconnect();
-                setSocket(null);
-                hangUp();
-              }, COUNT.HANG_UP * MILLISECOND);
-            }
-            return copy;
-          });
-        });
+        // peer[i].on("close", () => {
+        //   console.log("Peer 연결이 종료되었습니다.");
+        //   setOpponentStatus((prev) => {
+        //     const copy = prev.map((v) => v);
+        //     copy[i] = false;
+        //     let closed = true;
+        //     for (let i = 0; i < copy.length; i++) {
+        //       if (copy[i]) {
+        //         closed = false;
+        //         break;
+        //       }
+        //     }
+        //     if (closed) {
+        //       toast.error("통화가 종료되었습니다. 메인 화면으로 돌아갑니다.");
+        //       dispatch({ type: CallActionType.DEL_ALL });
+        //       timeoutId.current = setTimeout(() => {
+        //         socket?.disconnect();
+        //         setSocket(null);
+        //         hangUp();
+        //       }, COUNT.HANG_UP * MILLISECOND);
+        //     }
+        //     return copy;
+        //   });
+        // });
 
         peer[i].on("data", (data) => console.log(data));
       }
@@ -170,7 +170,7 @@ const Call = () => {
     return () => {
       window.removeEventListener("beforeunload", preventClose);
       stopMicrophone();
-      // 뒤로가기나,
+      // 뒤로가기나 새로고침하는 경우
       socket?.disconnect();
       setSocket(null);
     };
@@ -223,7 +223,7 @@ const Call = () => {
         <VoteToast
           contentsName={data.contentsName}
           requester={data.requester}
-          callType={callType}
+          totalNum={opponentStatus.filter((v) => v === true).length}
         />,
         { autoClose: (COUNT.VOTE - COUNT.DIFF) * MILLISECOND }
       );
@@ -257,9 +257,39 @@ const Call = () => {
     toast.error("시간 초과로 투표가 부결되었습니다.");
   }, []);
 
-  const onSocketDisconnect = useCallback((data: { nickname: string }) => {
-    console.log(data.nickname);
-  }, []);
+  const onSocketDisconnect = useCallback(
+    (data: { nickname: string }) => {
+      let target = 0;
+
+      if (callInfo.opponent)
+        callInfo.opponent.forEach((v, i) => {
+          if (v.opponentNickname === data.nickname) target = i;
+        });
+
+      setOpponentStatus((prev) => {
+        const copy = prev.map((v) => v);
+        copy[target] = false;
+        let closed = true;
+        for (let i = 0; i < copy.length; i++) {
+          if (copy[target]) {
+            closed = false;
+            break;
+          }
+        }
+        if (closed) {
+          toast.error("통화가 종료되었습니다. 메인 화면으로 돌아갑니다.");
+          dispatch({ type: CallActionType.DEL_ALL });
+          timeoutId.current = setTimeout(() => {
+            socket?.disconnect();
+            setSocket(null);
+            hangUp();
+          }, COUNT.HANG_UP * MILLISECOND);
+        }
+        return copy;
+      });
+    },
+    [socket]
+  );
 
   return socket === null ? (
     <Loading />
