@@ -50,7 +50,7 @@ const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
   }, []);
 
   return (
-    <div className={`grid grid-cols-${totalNum} w-full my-1 mx-auto`}>
+    <div className={`flex grow w-full my-1 mx-auto`}>
       {totalNum === null ? (
         <div>통화가 종료되었습니다.</div>
       ) : (

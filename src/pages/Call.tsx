@@ -261,8 +261,6 @@ const Call = () => {
     (data: { nickname: string }) => {
       let target = 0;
 
-      console.log("socketDisconnect", callInfo.currNum);
-
       if (callInfo.opponent)
         callInfo.opponent.forEach((v, i) => {
           if (v.opponentNickname === data.nickname) {
@@ -296,7 +294,7 @@ const Call = () => {
         return copy;
       });
     },
-    [socket, opponentStatus, callInfo.currNum]
+    [socket, opponentStatus, callInfo]
   );
 
   return socket === null ? (
