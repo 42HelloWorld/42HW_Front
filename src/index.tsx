@@ -25,6 +25,8 @@ axios.interceptors.response.use(
     return response;
   },
   function (error) {
+    // if (error.code === "403")
+    // else if (error.code === "400")
     alert("로그인 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
     deleteCookie("login");
     window.location.href = "/";

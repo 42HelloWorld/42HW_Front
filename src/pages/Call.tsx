@@ -265,13 +265,12 @@ const Call = () => {
         callInfo.opponent.forEach((v, i) => {
           if (v.opponentNickname === data.nickname) {
             target = i;
-            dispatch({
-              type: CallActionType.SET_CURRNUM,
-              payload: callInfo.currNum! - 1,
-            });
           }
         });
-
+      dispatch({
+        type: CallActionType.SET_CURRNUM,
+        payload: callInfo.currNum! - 1,
+      });
       setOpponentStatus((prev) => {
         const copy = prev.map((v) => v);
         copy[target] = false;
