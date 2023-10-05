@@ -269,7 +269,6 @@ const Call = () => {
           target = i;
         }
       });
-    console.log("disconnect", callInfo.currNum);
     dispatch({
       type: CallActionType.SET_CURRNUM,
       payload: callInfo.currNum!--,
