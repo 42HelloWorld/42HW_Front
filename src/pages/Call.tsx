@@ -47,7 +47,6 @@ const Call = () => {
       : GROUP_CALL.TOTAL_NUM - 1;
   const callType =
     callInfo.roomType === SINGLE_CALL.TYPE ? SINGLE_CALL : GROUP_CALL;
-  const currNumRef = useRef<number>(0);
 
   // /call로 접근하였을 때 잘 login 화면으로 가는지?
   useEffect(() => {
@@ -64,7 +63,6 @@ const Call = () => {
       }
     setOpponentStatus(status);
     dispatch({ type: CallActionType.SET_CURRNUM, payload: totalNum + 1 });
-    currNumRef.current = totalNum + 1;
   }, []);
 
   // TODO : 좌우 반전, 마이크 mute
@@ -152,7 +150,7 @@ const Call = () => {
       socket?.off("voteFail", onVoteFail);
       socket?.off("socketDisconnect", onSocketDisconnect);
     };
-  }, [voteId]);
+  }, [voteId, callInfo]);
 
   useEffect(() => {
     return () => {
@@ -274,7 +272,7 @@ const Call = () => {
 
     dispatch({
       type: CallActionType.SET_CURRNUM,
-      payload: currNumRef.current - 1,
+      payload: callInfo.currNum! - 1,
     });
 
     console.log("call", callInfo.currNum);
