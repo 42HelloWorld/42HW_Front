@@ -296,7 +296,7 @@ const Call = () => {
         return copy;
       });
     },
-    [socket, opponentStatus]
+    [socket, opponentStatus, callInfo.currNum]
   );
 
   return socket === null ? (
