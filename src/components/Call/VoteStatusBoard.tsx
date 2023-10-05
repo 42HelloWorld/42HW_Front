@@ -51,7 +51,9 @@ const VoteStatusBoard: FC<Props> = ({ totalNum }) => {
   }, []);
 
   return (
-    <div className={`grid grid-cols-${totalNumRef} w-full my-1 mx-auto`}>
+    <div
+      className={`grid grid-cols-${totalNumRef.current} w-full my-1 mx-auto`}
+    >
       {totalNum === null ? (
         <div>통화가 종료되었습니다.</div>
       ) : (
