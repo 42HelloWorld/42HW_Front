@@ -263,7 +263,7 @@ const Call = () => {
         if (closed) {
           // 혼자 남은 경우 종료
           toast.error("통화가 종료되었습니다. 메인 화면으로 돌아갑니다.");
-          dispatch({ type: CallActionType.SET_CURRNUM, payload: null });
+          dispatch({ type: CallActionType.SET_CURRNUM, payload: 1 });
           timeoutId.current = setTimeout(() => {
             dispatch({ type: CallActionType.DEL_ALL });
             socket?.disconnect();

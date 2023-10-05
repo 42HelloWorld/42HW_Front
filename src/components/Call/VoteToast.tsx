@@ -32,7 +32,9 @@ const VoteToast: FC<Props> = ({ contentsName, requester }) => {
   return (
     <div className="flex flex-col justify-evenly">
       <div className="my-1">{`[${requester}] TOPIC-${contentsName} 요청`}</div>
-      {callInfo.currNum ? (
+      {callInfo.currNum === 1 || callInfo === null ? (
+        <div>통화가 종료되었습니다.</div>
+      ) : (
         <>
           <VoteStatusBoard totalNum={callInfo.currNum} />
           <div className="flex justify-evenly my-1">
@@ -58,8 +60,6 @@ const VoteToast: FC<Props> = ({ contentsName, requester }) => {
             )}
           </div>
         </>
-      ) : (
-        <div>통화가 종료되었습니다.</div>
       )}
     </div>
   );

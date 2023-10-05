@@ -8,10 +8,10 @@ const WaitToast = () => {
   return (
     <div>
       <div className="my-1">투표 중입니다.</div>
-      {callInfo.currNum ? (
-        <VoteStatusBoard totalNum={callInfo.currNum} />
-      ) : (
+      {callInfo.currNum === 1 || callInfo === null ? (
         <div>통화가 종료되었습니다.</div>
+      ) : (
+        <VoteStatusBoard totalNum={callInfo.currNum} />
       )}
     </div>
   );
