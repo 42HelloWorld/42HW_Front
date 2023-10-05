@@ -229,7 +229,7 @@ const Call = () => {
       );
       setVoteId(id);
     },
-    [socket]
+    [socket, opponentStatus]
   );
 
   const onVoteResult = useCallback(
@@ -288,7 +288,7 @@ const Call = () => {
         return copy;
       });
     },
-    [socket]
+    [socket, opponentStatus]
   );
 
   return socket === null ? (
