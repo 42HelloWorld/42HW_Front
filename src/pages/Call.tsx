@@ -62,7 +62,7 @@ const Call = () => {
         status.push(true);
       }
     setOpponentStatus(status);
-    dispatch({ type: CallActionType.SET_CURRNUM, payload: totalNum });
+    dispatch({ type: CallActionType.SET_CURRNUM, payload: totalNum + 1 });
   }, []);
 
   // TODO : 좌우 반전, 마이크 mute
