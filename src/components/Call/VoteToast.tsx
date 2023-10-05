@@ -34,7 +34,7 @@ const VoteToast: FC<Props> = ({ contentsName, requester }) => {
   return (
     <div className="flex flex-col justify-evenly">
       <div className="my-1">{`[${requester}] TOPIC-${contentsName} 요청`}</div>
-      {callInfo.currNum === 1 || callInfo === null ? (
+      {callInfo.currNum === 1 || callInfo.currNum === null ? (
         <div>통화가 종료되었습니다.</div>
       ) : (
         <>
