@@ -20,7 +20,7 @@ import { toast, Id } from "react-toastify";
 import VoteToast from "@components/Call/VoteToast";
 import TopicModal from "@components/Call/TopicModal";
 import Loading from "@utils/Loading";
-import "@styles/Main";
+import "@styles/Main.css";
 
 const Call = () => {
   const navigate = useNavigate();
