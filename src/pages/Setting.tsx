@@ -10,6 +10,8 @@ import { MIC_STATUS, SINGLE_CALL } from "@utils/constant";
 import Loading from "@utils/Loading";
 import { useTranslation } from "react-i18next";
 
+import "@styles/Setting.css";
+
 const Setting = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -98,21 +100,45 @@ const Setting = () => {
   return socket === null ? (
     <Loading />
   ) : (
-    <div className="flex flex-col w-full h-full justify-center items-center">
-      <div>
-        {t(callInfo.roomType === SINGLE_CALL.TYPE ? "singleCall" : "groupCall")}
+    <div id="setting-container" className="flex flex-col w-full h-full justify-center items-center">
+      <div id="board-off" ></div>
+      <div id="v1">
+        <div id="board-title">
+          <div id="board-line">
+            {t(callInfo.roomType === SINGLE_CALL.TYPE ? "singleCall" : "groupCall")}
+          </div>
+        </div>
       </div>
-      <div>음성 통화를 위해 마이크 권한을 허용으로 설정해 주세요!</div>
-      <div className="h-[50%]">
+      <div id="v2" >
+        <div id="warring">
+          <p>
+            음성 통화를 위해 마이크 권한을 허용으로 설정해 주세요!
+          </p>
+        </div>
+      </div>
+      <div id="v3" className="h-[50%]">
         <MicrophoneSoundChecker isDone={isDone} />
+        <div id="icon-center">
+          <div id="icon-cont">
+            {
+              micStatus !== MIC_STATUS.GRANTED
+                ? <img id="mic-icon icon-size" alt="mic" src="icon/mic.512x512.png" />
+                : <img id="mic-icon icon-size" alt="mic" src="icon/check-circle.512x512.png" />
+            }
+          </div>
+        </div>
       </div>
-      <div className="h-[10%]">
-        <BasicButton
-          onClick={goToWaiting}
-          text="매칭 시작하기"
-          disabled={micStatus !== MIC_STATUS.GRANTED}
-        />
-        <BasicButton onClick={goToMain} text="뒤로 가기" />
+      <div id="v4" className="h-[10%]">
+        <div id="butten-center">
+          <BasicButton
+            onClick={goToWaiting}
+            text="매칭 시작하기"
+            disabled={micStatus !== MIC_STATUS.GRANTED}
+          />
+        </div>
+        <div id="butten-center">
+          <BasicButton onClick={goToMain} text="뒤로 가기" />
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,109 @@
+:root {
+    --base-color: #FFEDD5;
+    --deep-color: #FED6AA;
+    --text-color: #3e3b37;
+    --text-light-color: #96908a;
+    --font-size: 12px;
+}
+
+#setting-container {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+#v1 {
+    font-size: 32px;
+    margin-top: 10%;
+}
+#board-title {
+    display: inline-block;
+    padding: 4px;
+    border-radius: 16px;
+    background-color: var(--base-color);
+    box-shadow: 4px 4px var(--deep-color);
+}
+
+#board-line {
+    padding: 4px 16px;
+    border-radius: 16px;
+    border: 2px dashed white ;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+#v2 {
+    margin-top: 10px;
+}
+
+#warring {
+    font-size: var(--font-size);
+    position: relative;
+    display: inline-block;
+    border: 1px solid var(--deep-color);
+    color: var(--text-light-color);
+    padding: 4px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+#warring::before {
+    position: absolute;
+    content: url('./icon/error.svg');
+    left: calc(var(--font-size) / -1.5);
+    top: calc(var(--font-size) / -1.5);
+    width: var(--font-size);
+    height: var(--font-size);
+}
+
+#v3 {
+    position: relative;
+}
+
+#icon-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    color: aquamarine;
+}
+#icon-center #icon-cont {
+    margin: auto;
+    width: 20%;
+    min-width: 32px;
+    overflow: hidden;
+}
+#icon-center #icon-cont #icon-size {
+    width: 100%;
+    height: 100%;
+}
+
+#v4 {
+    text-align: center;
+}
+
+#butten-center {
+    position: relative;
+    display: inline-block;
+    margin: 8px;
+}
+#board-off {
+    z-index: 3;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background-color: var(--base-color);
+    border-top-right-radius: 24px;
+    border-top-left-radius: 24px;
+    box-shadow: 0px -4px #ddd;
+    animation: height-off;
+    animation-duration: 3s;
+}
+
+@keyframes height-off {
+    0% {
+        height: 50%;
+    }
+    100% {
+        height: 0px;
+    }
+}

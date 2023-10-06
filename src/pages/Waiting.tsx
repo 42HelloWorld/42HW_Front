@@ -12,6 +12,7 @@ import { OpponentInfo } from "@typings/front";
 import { useTranslation } from "react-i18next";
 import { SINGLE_CALL } from "@utils/constant";
 
+
 const Waiting = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
