@@ -20,11 +20,6 @@ body {
   display: flex;
   align-items: center;
   overscroll-behavior-x: none;
-  transform: rotate(0deg);
-  transform-origin: center;
-  width: 100vh; /* 화면 세로 크기를 화면 가로 크기로 변경 */
-  height: 100vw; /* 화면 가로 크기를 화면 세로 크기로 변경 */
-  overflow: hidden; /* 화면 내용이 넘칠 경우 숨김 처리 */
 }
 
 #root {
@@ -37,9 +32,14 @@ body {
   background-color: white;
 }
 
+/* 스타일 파일 (예: App.css) */
 @media (orientation: landscape) {
-  /* 가로 모드에서 숨기려는 요소의 스타일 설정 */
-  .mobile-landscape {
-    display: none;
+  /* 모바일 가로 모드에서도 세로 모드를 유지할 스타일 설정 */
+  body {
+    transform: rotate(0deg);
+    transform-origin: center;
+    width: 100vh; /* 화면 세로 크기를 화면 가로 크기로 변경 */
+    height: 100vw; /* 화면 가로 크기를 화면 세로 크기로 변경 */
+    overflow: hidden; /* 화면 내용이 넘칠 경우 숨김 처리 */
   }
 }
