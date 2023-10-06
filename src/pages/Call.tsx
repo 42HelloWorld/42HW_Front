@@ -44,8 +44,7 @@ const Call = () => {
     callInfo.roomType === SINGLE_CALL.TYPE
       ? SINGLE_CALL.TOTAL_NUM - 1
       : GROUP_CALL.TOTAL_NUM - 1;
-  const callType =
-    callInfo.roomType === SINGLE_CALL.TYPE ? SINGLE_CALL : GROUP_CALL;
+  const divRef = useRef<HTMLDivElement>(null);
 
   // /call로 접근하였을 때 잘 login 화면으로 가는지?
   useEffect(() => {
@@ -155,6 +154,22 @@ const Call = () => {
       setSocket(null);
       dispatch({ type: CallActionType.DEL_ALL });
     };
+  }, []);
+
+  useEffect(() => {
+    let length = 0;
+    if (divRef.current) {
+      const spans = divRef.current.firstElementChild;
+      while (spans != null) {
+        if (spans instanceof HTMLElement) {
+          console.log(spans.clientWidth);
+        }
+      }
+      console.log(spans);
+      // spans.map((v) => {
+      //   console.log(v.style);
+      // });
+    }
   }, []);
 
   const preventClose = useCallback((e: BeforeUnloadEvent) => {
@@ -280,7 +295,7 @@ const Call = () => {
     <Loading />
   ) : (
     <div className="w-full h-full flex flex-col items-center justify-center">
-      <div className="h-[15%] flex flex-col justify-evenly">
+      <div className="w-full h-[15%] flex flex-col justify-evenly">
         {callInfo.opponent?.map((v, i) => (
           <video
             key={`opponentVideo-${v}-${i}`}
@@ -292,23 +307,29 @@ const Call = () => {
             ref={videos[i]}
           />
         ))}
-        <div className="text-4xl w-full relative overflow-hidden">
-          {callInfo.opponent?.map((v, i) => (
-            <span
-              key={`opponent-${v}-${i}`}
-              className={`${opponentStatus[i] ? "" : "text-gray"}`}
-              style={{
-                animation: "moveRight 5s linear infinite",
-                whiteSpace: "nowrap",
-                position: "absolute",
-              }}
-            >
-              {(opponentStatus[i] ? "🟢" : "🔴") +
-                " " +
-                v.opponentNickname +
-                " "}
-            </span>
-          ))}
+        <div className="text-4xl w-[300px] h-full mx-auto overflow-hidden">
+          <div
+            style={{
+              transform: "translateX(15px)" /* 5% */,
+              whiteSpace: "nowrap",
+              willChange: "transform",
+              animation: "marquee 5s linear infinite",
+            }}
+          >
+            <div className="text-center" ref={divRef}>
+              {callInfo.opponent?.map((v, i) => (
+                <span
+                  key={`opponent-${v}-${i}`}
+                  className={`${opponentStatus[i] ? "" : "text-gray"}`}
+                >
+                  {(opponentStatus[i] ? "🟢" : "🔴") +
+                    " " +
+                    v.opponentNickname +
+                    " "}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
         <Timer />
       </div>
