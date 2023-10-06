@@ -65,6 +65,7 @@ export const TOPIC_LIST = [
   // "42",
 ];
 
+// google URL도 ENV화
 export const ICE_SERVER = [
   {
     urls: [
@@ -81,3 +82,5 @@ export const ICE_SERVER = [
     credential: process.env.REACT_APP_TURN_PASSWORD,
   },
 ];
+
+export const OPPONENT_LIST_WIDTH = 280;

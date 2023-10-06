@@ -15,6 +15,7 @@ import {
   MILLISECOND,
   SINGLE_CALL,
   GROUP_CALL,
+  OPPONENT_LIST_WIDTH,
 } from "@utils/constant";
 import { toast, Id } from "react-toastify";
 import VoteToast from "@components/Call/VoteToast";
@@ -159,16 +160,35 @@ const Call = () => {
   useEffect(() => {
     let length = 0;
     if (divRef.current) {
-      const spans = divRef.current.firstElementChild;
+      let spans = divRef.current.firstElementChild;
       while (spans != null) {
         if (spans instanceof HTMLElement) {
-          console.log(spans.clientWidth);
+          console.log(spans.offsetWidth);
+          length += spans.offsetWidth;
         }
+        spans = spans.nextElementSibling;
       }
-      console.log(spans);
-      // spans.map((v) => {
-      //   console.log(v.style);
-      // });
+      console.log(length);
+      if (length >= OPPONENT_LIST_WIDTH)
+        if (divRef.current.parentElement) {
+          const animation = document.createElement("style");
+          animation.type = "text/css";
+          animation.innerHTML = `
+              @keyframes slide-left {
+                from {
+                  transform: translateX(0px);
+                }
+                to {
+                  transform: translateX(-${length - OPPONENT_LIST_WIDTH}px);
+                }
+              }
+              .animated {
+                animation: slide-left 10s linear infinite
+              }
+            `;
+          document.head.appendChild(animation);
+          divRef.current.parentElement.classList.add("animated");
+        }
     }
   }, []);
 
@@ -307,21 +327,19 @@ const Call = () => {
             ref={videos[i]}
           />
         ))}
-        <div className="text-4xl w-[300px] h-full mx-auto overflow-hidden">
+        <div
+          className={`w-[${OPPONENT_LIST_WIDTH}px] h-full mx-auto overflow-hidden`}
+        >
           <div
             style={{
-              transform: "translateX(15px)" /* 5% */,
+              transform: "translateX(0px)",
               whiteSpace: "nowrap",
               willChange: "transform",
-              animation: "marquee 5s linear infinite",
             }}
           >
             <div className="text-center" ref={divRef}>
               {callInfo.opponent?.map((v, i) => (
-                <span
-                  key={`opponent-${v}-${i}`}
-                  className={`${opponentStatus[i] ? "" : "text-gray"}`}
-                >
+                <span key={`opponent-${v}-${i}`} className="text-4xl">
                   {(opponentStatus[i] ? "🟢" : "🔴") +
                     " " +
                     v.opponentNickname +
