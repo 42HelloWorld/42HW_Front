@@ -19,3 +19,12 @@
     opacity: 0;
   }
 }
+
+@keyframes moveRight {
+  from {
+    left: 0; /* 시작 위치 */
+  }
+  to {
+    left: 100%; /* 오른쪽으로 이동할 최종 위치 */
+  }
+}

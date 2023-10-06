@@ -20,6 +20,7 @@ import { toast, Id } from "react-toastify";
 import VoteToast from "@components/Call/VoteToast";
 import TopicModal from "@components/Call/TopicModal";
 import Loading from "@utils/Loading";
+import "@styles/Main";
 
 const Call = () => {
   const navigate = useNavigate();
@@ -291,11 +292,22 @@ const Call = () => {
             ref={videos[i]}
           />
         ))}
-        <div className={callType === SINGLE_CALL ? "text-4xl" : "text-xl"}>
+        <div className="text-4xl w-full relative overflow-hidden">
           {callInfo.opponent?.map((v, i) => (
-            <div key={`opponent-${v}-${i}`}>
-              {(opponentStatus[i] ? "🟢" : "🔴") + " " + v.opponentNickname}
-            </div>
+            <span
+              key={`opponent-${v}-${i}`}
+              className={`${opponentStatus[i] ? "" : "text-gray"}`}
+              style={{
+                animation: "moveRight 5s linear infinite",
+                whiteSpace: "nowrap",
+                position: "absolute",
+              }}
+            >
+              {(opponentStatus[i] ? "🟢" : "🔴") +
+                " " +
+                v.opponentNickname +
+                " "}
+            </span>
           ))}
         </div>
         <Timer />
