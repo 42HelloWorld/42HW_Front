@@ -25,6 +25,7 @@ function App() {
         <ToastContainer
           position="top-center"
           theme="colored"
+          hideProgressBar={true}
           closeOnClick={false}
           pauseOnHover={false}
           pauseOnFocusLoss={false}
