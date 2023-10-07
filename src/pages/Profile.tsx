@@ -9,6 +9,9 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { API_URL } from "@utils/constant";
 
+
+import "@styles/Profile.css"
+
 const Profile = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -27,11 +30,15 @@ const Profile = () => {
     <>
       <Header onClick={closeModal} title={t("profile")} />
       <div className="h-[90%] w-full p-4">
-        <div className="h-[100%] w-full flex flex-col justify-around">
+        <div >
           <ProfileCard />
-          <div className="h-[70%] flex flex-col justify-evenly">
-            <LangSelect />
-            <CallHistoryList />
+          <div id="profile-view">
+            <div id="view-child">
+              <LangSelect />
+            </div>
+            <div id="view-child">
+              <CallHistoryList />
+            </div>
           </div>
           <div className="h-[10%] flex items-center justify-center">
             <BasicButton onClick={logout} text="로그아웃" />

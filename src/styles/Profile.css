@@ -1,0 +1,149 @@
+:root {
+    --base-color: #FFEDD5;
+    --deep-color: #FED6AA;
+    --deep-dark-color: #f8b874;
+    --light-color: #ffffff;
+    --board-black: #aaa;
+}
+
+#profile-view #view-child{
+    margin: 10px 0px 10px 0px;
+}
+
+#cont-profile {
+    position: relative;
+    display: block;
+    /* background-color: rgb(255, 0, 0); */
+}
+
+#cont-profile #title {
+    background-color: var(--base-color);
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+    padding: 2px 0px 0px 8px;
+    color: white;
+    font-size: 24px;
+    font-weight: 800;
+    text-shadow:
+        1px 1px var(--deep-dark-color),
+        2px 2px var(--deep-dark-color),
+        3px 3px var(--deep-dark-color),
+        4px 4px var(--deep-dark-color),
+        2px 2px 16px #fff,
+        2px 2px 16px #fff,
+        2px 2px 16px #fff;
+
+}
+
+#cont-profile #board {
+    background-color: var(--base-color);
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    padding: 4px;
+    color: white;
+}
+
+#cont-profile #board #line-dashed {
+    border: 2px dashed white;
+    border-radius: 16px;
+    padding: 4px;
+}
+
+#cont-profile #board #line-dashed p {
+    content: "test";
+    color: black;
+    background-color: var(--light-color);
+    border-radius: 12px;
+    padding: 8px
+}
+
+#cont-profile #board #line-dashed #board-select {
+    content: "test";
+    color: black;
+    background-color: var(--light-color);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+}
+
+#cont-profile #board #line-dashed #board-select span {
+    color: var(--deep-dark-color);
+    width: 25%;
+    position: relative;
+    border-right: 2px solid var(--base-color);
+    font-weight: 600;
+    text-align: center;
+    overflow-x: scroll;
+}
+
+/* #cont-profile #board #line-dashed #board-select select {
+    -o-appearansce: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+} */
+
+#cont-profile #board #line-dashed #board-select select {
+    padding-left: 10px;
+    width: 75%;
+    max-width: 75%;
+    overflow-x: scroll;
+}
+
+
+
+#board-profile-info {
+    position: relative;
+    display: flex;
+    /* background-color: #aaa; */
+}
+#board-profile-info #info {
+    padding: 8px;
+}
+
+#board-profile-info #info #profile-name {
+    font-size: 24px;
+    font-weight: 700;
+    font-family:'Courier New', Courier, monospace;
+}
+#board-profile-info #info #profile-campus {
+    font-size: 16px;
+    color: #333;
+}
+
+
+#board-profile-info #img-profile {
+    width: 30%;
+    border-radius: 100%;
+    overflow: hidden;
+    box-shadow: 
+        0px 0px 4px var(--deep-dark-color),
+        0px 0px 8px var(--deep-color),
+        0px 0px 12px var(--deep-color);
+}
+
+#board-profile-info #info {
+    padding-top: 16px;
+    width: 70%;
+}
+
+#board-profile-level {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+}
+
+#board-profile-level #level-text {
+    font-weight: 900;
+    color: var(--deep-dark-color);
+    font-family:'Courier New', Courier, monospace;
+    width: 15%;
+    text-shadow: 0px 0px 1px var(--deep-dark-color);
+    
+}
+#board-profile-level #level-bar {
+    background: linear-gradient(45deg, var(--base-color) 25%, var(--base-color) 0, var(--deep-color) 50%, var(--deep-dark-color) 0, var(--deep-color) 75%, var(--base-color) 0 );
+    background-size: 20% 100%; 
+    width: 80%;
+    border-radius: 15px;
+}

@@ -25,33 +25,24 @@ const ProfileCard = () => {
     <div className="flex justify-center h-[20%] w-full">
       <div className="w-[80%] flex flex-col justify-around items-center">
         {myInfo ? (
-          <>
-            <div className="flex justify-center">
-              <img
-                draggable="false"
-                className="h-[40px] my-auto aspect-square rounded-[100%] bg-[#ffffff] shadow-2x m-4"
-                src={
-                  myInfo && myInfo.avatar
-                    ? myInfo.avatar
-                    : "default-avatar.jpeg"
-                }
-                alt="profile-avatar"
-              />
-              <div className="text-center text-[20px]">{myInfo.nickname}</div>
+          <div>
+            <div id="board-profile-info">
+              <div id="img-profile">
+                <img draggable="false"
+                  src={myInfo && myInfo.avatar ? myInfo.avatar : "default-avatar.jpeg"}
+                  alt="profile-avatar"
+                />
+              </div>
+              <div id="info">
+                <div id="profile-name" className="text-center text-[20px]">{myInfo.nickname}</div>
+                <div id="profile-campus"className="text-center">🇰🇷 42 {myInfo.campus}</div>
+              </div>
             </div>
-            <div className="text-center">🇰🇷 42 {myInfo.campus}</div>
-            <div className="flex justify-center items-center">
-              <div className="text-center mx-3">
+            <div id="board-profile-level">
+              <div id="level-text"className="text-center mx-3">
                 Lv {Math.floor(myInfo.level)}
               </div>
-              <div
-                style={{
-                  backgroundColor: "#333333",
-                  borderRadius: "5px",
-                  width: "100px",
-                  height: "15px",
-                }}
-              >
+              <div id="level-bar">
                 <div
                   style={{
                     width: isOpen ? `${(myInfo.level % 1) * 100}%` : "0%",
@@ -63,7 +54,7 @@ const ProfileCard = () => {
                 />
               </div>
             </div>
-          </>
+          </div>
         ) : (
           <BarLoader
             color={"#808080"}
