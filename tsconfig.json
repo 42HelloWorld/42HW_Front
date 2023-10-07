@@ -24,7 +24,8 @@
       "@utils/*": ["utils/*"],
       "@styles/*": ["styles/*"],
       "@typings/*": ["typings/*"],
-      "@contexts/*": ["contexts/*"]
+      "@contexts/*": ["contexts/*"],
+      "@/*": ["./*"]
     }
   },
   "include": ["src"],
