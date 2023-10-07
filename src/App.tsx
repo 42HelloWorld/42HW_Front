@@ -16,8 +16,8 @@ console.log(i18n);
 
 function App() {
   return (
-    <div className="container h-full">
-      <div className="h-[100%]">
+    <div className="h-full">
+      <div className="h-full">
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="*" element={<MainRouter />} />
