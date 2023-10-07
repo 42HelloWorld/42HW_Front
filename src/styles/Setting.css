@@ -10,6 +10,7 @@
     position: relative;
     display: inline-block;
     text-align: center;
+    overflow-y: scroll;
 }
 
 #v1 {
@@ -58,6 +59,7 @@
 
 #v3 {
     position: relative;
+    margin-top: 48px;;
 }
 
 #icon-center {
@@ -79,6 +81,7 @@
 
 #v4 {
     text-align: center;
+    min-height: 100px;
 }
 
 #butten-center {
