@@ -15,7 +15,7 @@ import {
   MILLISECOND,
   SINGLE_CALL,
   GROUP_CALL,
-  OPPONENT_LIST_WIDTH,
+  OPPONENT_LIST,
 } from "@utils/constant";
 import { toast, Id } from "react-toastify";
 import VoteToast from "@components/Call/VoteToast";
@@ -163,23 +163,23 @@ const Call = () => {
       let spans = divRef.current.firstElementChild;
       while (spans != null) {
         if (spans instanceof HTMLElement) {
-          console.log(spans.offsetWidth);
           length += spans.offsetWidth;
         }
         spans = spans.nextElementSibling;
       }
-      console.log(length);
-      if (length >= OPPONENT_LIST_WIDTH)
+      if (length >= OPPONENT_LIST.BOX_WIDTH)
         if (divRef.current.parentElement) {
           const animation = document.createElement("style");
           animation.type = "text/css";
           animation.innerHTML = `
               @keyframes slide-left {
                 from {
-                  transform: translateX(0px);
+                  transform: translateX(${OPPONENT_LIST.PADDING}px);
                 }
                 to {
-                  transform: translateX(-${length - OPPONENT_LIST_WIDTH}px);
+                  transform: translateX(-${
+                    length + OPPONENT_LIST.PADDING - OPPONENT_LIST.BOX_WIDTH
+                  }px);
                 }
               }
               .animated {
@@ -332,22 +332,24 @@ const Call = () => {
           />
         ))}
         <div
-          className={`w-[${OPPONENT_LIST_WIDTH}px] h-full mx-auto overflow-hidden`}
+          className={`w-[${OPPONENT_LIST.BOX_WIDTH}px] h-full mx-auto overflow-hidden`}
         >
           <div
             style={{
-              transform: "translateX(0px)",
+              transform: `translateX(${OPPONENT_LIST.PADDING}px)`,
               whiteSpace: "nowrap",
               willChange: "transform",
             }}
           >
             <div className="text-center" ref={divRef}>
               {callInfo.opponent?.map((v, i) => (
-                <span key={`opponent-${v}-${i}`} className="text-4xl">
-                  {(opponentStatus[i] ? "🟢" : "🔴") +
-                    " " +
-                    v.opponentNickname +
-                    " "}
+                <span
+                  key={`opponent-${v}-${i}`}
+                  className={`text-4xl ${
+                    opponentStatus[i] ? "text-black" : "text-gray-300"
+                  }`}
+                >
+                  {" " + v.opponentNickname + " "}
                 </span>
               ))}
             </div>

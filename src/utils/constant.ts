@@ -83,4 +83,7 @@ export const ICE_SERVER = [
   },
 ];
 
-export const OPPONENT_LIST_WIDTH = 280;
+export const OPPONENT_LIST = {
+  BOX_WIDTH: 280,
+  PADDING: 20,
+};
