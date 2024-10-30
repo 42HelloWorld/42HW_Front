@@ -359,9 +359,9 @@ const Call = () => {
                 playsInline
                 autoPlay
                 muted={false}
-                ref={(el) => {
-                  if (el) {
-                    videoRefs.current[i] = el;
+                ref={(ref) => {
+                  if (ref) {
+                    videoRefs.current[i] = ref;
                   }
                 }}
               />
